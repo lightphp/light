@@ -1,0 +1,20 @@
+# https://travis-ci.org
+
+language:
+  - php
+
+sudo: required
+dist: trusty
+
+php:
+  - '7.0'
+  - nightly
+
+script:
+  - phpize
+  - ./configure --enable-light
+  - make
+  - make test
+
+notifications:
+  email: false
