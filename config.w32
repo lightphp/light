@@ -1,0 +1,8 @@
+// $Id$
+// vim:ft=javascript
+
+ARG_ENABLE("light", "enable light support", "no");
+
+if (PHP_LIGHT != "no") {
+	EXTENSION("light", "php_light.c", PHP_EXTNAME_SHARED, "/DZEND_ENABLE_STATIC_TSRMLS_CACHE=1");
+}
