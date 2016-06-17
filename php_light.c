@@ -9,6 +9,9 @@
 #include "Zend/zend_extensions.h"
 #include "ext/standard/info.h"
 
+#include "classes/classes.h"
+#include "classes/application/application.h"
+
 ZEND_DECLARE_MODULE_GLOBALS(light)
 
 static int le_light;
@@ -30,6 +33,7 @@ static void php_light_init_globals(zend_light_globals *light_globals) /* {{{ */
 PHP_MINIT_FUNCTION(light) /* {{{ */
 {
 	REGISTER_INI_ENTRIES();
+	LIGHT_REGISTER_CLASSES();
 	return SUCCESS;
 }
 /* }}} */

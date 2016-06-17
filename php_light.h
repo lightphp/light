@@ -1,6 +1,8 @@
 #ifndef PHP_LIGHT_H
 #define PHP_LIGHT_H
 
+#include <php.h>
+
 extern zend_module_entry light_module_entry;
 #define phpext_light_ptr &light_module_entry
 
