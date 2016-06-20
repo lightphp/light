@@ -4,7 +4,12 @@
 extern zend_module_entry light_module_entry;
 #define phpext_light_ptr &light_module_entry
 
-#define PHP_LIGHT_VERSION "0.1.0"
+#define LIGHT_NAME				"Light"
+#define LIGHT_VERSION			"0.1.0-dev"
+#define LIGHT_AUTHOR			"loss"
+#define LIGHT_URL				"https://lightphp.com"
+#define LIGHT_COPYRIGHT			"Copyright (c) 2015-2016 by loss"
+#define LIGHT_COPYRIGHT_SHORT	"Copyright (c) 2015-2016"
 
 #ifdef PHP_WIN32
 #	define PHP_LIGHT_API __declspec(dllexport)

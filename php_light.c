@@ -88,14 +88,14 @@ const zend_function_entry light_functions[] = {
  */
 zend_module_entry light_module_entry = {
 	STANDARD_MODULE_HEADER,
-	"light",
+	LIGHT_NAME,
 	light_functions,
 	PHP_MINIT(light),
 	PHP_MSHUTDOWN(light),
 	PHP_RINIT(light),
 	PHP_RSHUTDOWN(light),
 	PHP_MINFO(light),
-	PHP_LIGHT_VERSION,
+	LIGHT_VERSION,
 	STANDARD_MODULE_PROPERTIES
 };
 /* }}} */
