@@ -5,11 +5,14 @@
 #include "php.h"
 #include "php_ini.h"
 #include "php_light.h"
+#include "Zend/zend.h"
+#include "Zend/zend_extensions.h"
 #include "ext/standard/info.h"
 
 ZEND_DECLARE_MODULE_GLOBALS(light)
 
 static int le_light;
+int zend_light_initialised = 0;
 
 /* {{{ PHP_INI
  */
@@ -84,6 +87,8 @@ const zend_function_entry light_functions[] = {
 };
 /* }}} */
 
+ZEND_MODULE_POST_ZEND_DEACTIVATE_D(light)
+{}
 /* {{{ light_module_entry
  */
 zend_module_entry light_module_entry = {
@@ -96,7 +101,48 @@ zend_module_entry light_module_entry = {
 	PHP_RSHUTDOWN(light),
 	PHP_MINFO(light),
 	LIGHT_VERSION,
-	STANDARD_MODULE_PROPERTIES
+	NO_MODULE_GLOBALS,
+	ZEND_MODULE_POST_ZEND_DEACTIVATE_N(light),
+	STANDARD_MODULE_PROPERTIES_EX
+};
+/* }}} */
+
+ZEND_DLEXPORT int light_zend_startup(zend_extension *extension) /* {{{ */
+{
+	zend_light_initialised = 1;
+	return zend_startup_module(&light_module_entry);
+}
+/* }}} */
+
+ZEND_DLEXPORT void light_zend_shutdown(zend_extension *extension) /* {{{ */
+{
+}
+/* }}} */
+
+#ifndef ZEND_EXT_API
+#define ZEND_EXT_API ZEND_DLEXPORT
+#endif
+
+ZEND_EXTENSION();
+
+ZEND_EXT_API zend_extension zend_extension_entry = { /* {{{ */
+	LIGHT_NAME,
+	LIGHT_VERSION,
+	LIGHT_AUTHOR,
+	LIGHT_URL,
+	LIGHT_COPYRIGHT_SHORT,
+	light_zend_startup,
+	light_zend_shutdown,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	STANDARD_ZEND_EXTENSION_PROPERTIES
 };
 /* }}} */
 
