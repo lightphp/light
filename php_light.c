@@ -14,44 +14,34 @@ ZEND_DECLARE_MODULE_GLOBALS(light)
 static int le_light;
 int zend_light_initialised = 0;
 
-/* {{{ PHP_INI
- */
-PHP_INI_BEGIN()
-    STD_PHP_INI_ENTRY("light.int", "42", PHP_INI_ALL, OnUpdateLong, global_int, zend_light_globals, light_globals)
-    STD_PHP_INI_ENTRY("light.str", "string", PHP_INI_ALL, OnUpdateString, global_str, zend_light_globals, light_globals)
+PHP_INI_BEGIN() /* {{{ */
+	STD_PHP_INI_ENTRY("light.int", "42", PHP_INI_ALL, OnUpdateLong, global_int, zend_light_globals, light_globals)
+	STD_PHP_INI_ENTRY("light.str", "string", PHP_INI_ALL, OnUpdateString, global_str, zend_light_globals, light_globals)
 PHP_INI_END()
 /* }}} */
 
-/* {{{ php_light_init_globals
- */
-static void php_light_init_globals(zend_light_globals *light_globals)
+static void php_light_init_globals(zend_light_globals *light_globals) /* {{{ */
 {
 	light_globals->global_int = 42;
 	light_globals->global_str = "string";
 }
 /* }}} */
 
-/* {{{ PHP_MINIT_FUNCTION
- */
-PHP_MINIT_FUNCTION(light)
+PHP_MINIT_FUNCTION(light) /* {{{ */
 {
 	REGISTER_INI_ENTRIES();
 	return SUCCESS;
 }
 /* }}} */
 
-/* {{{ PHP_MSHUTDOWN_FUNCTION
- */
-PHP_MSHUTDOWN_FUNCTION(light)
+PHP_MSHUTDOWN_FUNCTION(light) /* {{{ */
 {
 	UNREGISTER_INI_ENTRIES();
 	return SUCCESS;
 }
 /* }}} */
 
-/* {{{ PHP_RINIT_FUNCTION
- */
-PHP_RINIT_FUNCTION(light)
+PHP_RINIT_FUNCTION(light) /* {{{ */
 {
 #if defined(COMPILE_DL_LIGHT) && defined(ZTS)
 	ZEND_TSRMLS_CACHE_UPDATE();
@@ -60,17 +50,13 @@ PHP_RINIT_FUNCTION(light)
 }
 /* }}} */
 
-/* {{{ PHP_RSHUTDOWN_FUNCTION
- */
-PHP_RSHUTDOWN_FUNCTION(light)
+PHP_RSHUTDOWN_FUNCTION(light) /* {{{ */
 {
 	return SUCCESS;
 }
 /* }}} */
 
-/* {{{ PHP_MINFO_FUNCTION
- */
-PHP_MINFO_FUNCTION(light)
+PHP_MINFO_FUNCTION(light) /* {{{ */
 {
 	php_info_print_table_start();
 	php_info_print_table_header(2, "light support", "enabled");
@@ -80,18 +66,17 @@ PHP_MINFO_FUNCTION(light)
 }
 /* }}} */
 
-/* {{{ light_functions[]
- */
-const zend_function_entry light_functions[] = {
+const zend_function_entry light_functions[] = { /* {{{ */
 	PHP_FE_END
 };
 /* }}} */
 
-ZEND_MODULE_POST_ZEND_DEACTIVATE_D(light)
-{}
-/* {{{ light_module_entry
- */
-zend_module_entry light_module_entry = {
+ZEND_MODULE_POST_ZEND_DEACTIVATE_D(light) /* {{{ */
+{
+}
+/* }}} */
+
+zend_module_entry light_module_entry = { /* {{{ */
 	STANDARD_MODULE_HEADER,
 	LIGHT_NAME,
 	light_functions,
